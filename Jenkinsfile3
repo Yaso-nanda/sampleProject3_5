@@ -1,0 +1,35 @@
+pipeline {
+     agent any
+     
+     stages {
+         stage('SonarQube analysis & Mvn') {
+              steps{
+                   script{
+                      scannerHome=tool 'sonarqube'
+                   }
+                   withSonarQubeEnv('sonarqube'){
+                     sh "mvn clean install -DskipTests sonar:sonar \
+                    -Dsonar.projectKey=sonar-maven \
+                    -Dsonar.host.url=http://192.168.50.104:9000 \
+                    -Dsonar.login=d33c224155aa7f3777856387ded0dccd7205a02b \
+                    -Dsonar.sources=src/main/java/ \
+                    -Dsonar.java.binaries=target/classes"
+                   }
+              }
+           }
+         stage('Ansible Deploying'){
+             steps {
+                sh 'ssh ansadmin@192.168.50.104 rm -rf ansible_test'
+                sh 'scp -rp /var/lib/jenkins/workspace/ansible_test ansadmin@192.168.50.104:/home/ansadmin/'
+                sh 'ssh -tt ansadmin@192.168.50.104 ansible-playbook -i /home/ansadmin/ansible_test/hosts.yml /home/ansadmin/ansible_test/playbook.yml'
+                //sh 'ssh ansadmin@192.168.50.104'
+                //sh 'cd ansible_test'
+                //sh 'ansible-playbook -i hosts.yml playbook.yml'
+                //sh 'ssh user@server /bin/bash <<"EOT"
+                //echo "These commands will be run on: $( uname -a )"
+                //echo "They are executed by: $( whoami )"
+                //EOT'
+             }
+         }
+     }
+}

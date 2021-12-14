@@ -1,0 +1,25 @@
+version: "3"
+services:
+    mysqldb3:
+        image: 'mysql:8'
+        environment:
+            - MYSQL_ROOT_PASSWORD=root
+            - MYSQL_PASSWORD=root
+            - MYSQL_DATABASE=employee_management_system
+        ports:
+            - "3345:3306"
+        restart: always
+    springboot-docker-container3:
+        image: springboot-docker-container3
+        ports:
+            - "8026:8080"
+        restart: always
+        environment: 
+            SPRING_DATASOURCE_URL: jdbc:mysql://mysqldb3:3306/employee_management_system
+            SPRING_DATASOURCE_USERNAME: "root"
+            SPRING_DATASOURCE_PASSWORD: "root"
+        build:
+            context: "./"
+            dockerfile: "Dockerfile"
+        depends_on:
+            - mysqldb3
