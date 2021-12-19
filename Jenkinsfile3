@@ -19,9 +19,10 @@ pipeline {
            }
          stage('Ansible Deploying'){
              steps {
-                sh 'ssh ansadmin@192.168.50.104 rm -rf ansible_test'
-                sh 'scp -rp /var/lib/jenkins/workspace/ansible_test ansadmin@192.168.50.104:/home/ansadmin/'
-                sh 'ssh -tt ansadmin@192.168.50.104 ansible-playbook -i /home/ansadmin/ansible_test/hosts.yml /home/ansadmin/ansible_test/playbook.yml'
+                sh 'ssh -tt ansadmin@192.168.50.104 ansible-playbook -i /opt/kubernetes/hosts /opt/kubernetes/test.yml'
+                //sh 'ssh ansadmin@192.168.50.104 rm -rf ansible_test'
+                //sh 'scp -rp /var/lib/jenkins/workspace/ansible_test ansadmin@192.168.50.104:/home/ansadmin/'
+                //sh 'ssh -tt ansadmin@192.168.50.104 ansible-playbook -i /home/ansadmin/ansible_test/hosts.yml /home/ansadmin/ansible_test/playbook.yml'
                 //sh 'ssh ansadmin@192.168.50.104'
                 //sh 'cd ansible_test'
                 //sh 'ansible-playbook -i hosts.yml playbook.yml'
