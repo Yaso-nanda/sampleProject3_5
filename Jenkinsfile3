@@ -1,6 +1,10 @@
 pipeline {
      agent any
      
+     environment{
+        DOCKERHUB_CREDENTIALS = credentials('dockerhub')
+     }
+     
      stages {
          stage('SonarQube analysis & Mvn') {
               steps{
@@ -17,6 +21,14 @@ pipeline {
                    }
               }
            }
+           
+         stage('docker push'){
+              steps{
+                 sh 'docker build -t dockerdmantz/sb-repo .'
+                 sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+                 sh 'docker push dockerdmantz/sb-repo'
+              }
+         } 
          stage('Ansible Deploying'){
              steps {
                 sh 'ssh -tt ansadmin@192.168.50.104 ansible-playbook -i /opt/kubernetes/hosts /opt/kubernetes/test.yml'
