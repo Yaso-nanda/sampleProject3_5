@@ -1,0 +1,24 @@
+pipeline {
+     agent any
+     
+     environment{
+        DOCKERHUB_CREDENTIALS = credentials('dockerhub')
+     }
+     
+     stages {
+         stage('SonarQube analysis & Mvn') {
+              steps{
+                   withSonarQubeEnv('sonarqube'){
+                     sh 'mvn clean install -DskipTests sonar:sonar'
+                   }
+              }
+           }
+        stage("Quality Gate") {
+            steps {
+              timeout(time: 1, unit: 'HOURS') {
+                waitForQualityGate abortPipeline: true
+              }
+            }
+          }
+       }
+}
