@@ -5,7 +5,7 @@ pipeline {
          stage('testing'){
            steps{
              withCredentials([string(credentialsId: 'nexus_pass', Variable: 'PASSWORD')]) {
-                sh 'docker login nexus.dmantzrepo.tech/repo -u admin -p ${PASSWORD}'
+                sh 'docker login nexus.dmantzrepo.tech/repo -u admin -p "${PASSWORD}"'
              }
          }
          }
