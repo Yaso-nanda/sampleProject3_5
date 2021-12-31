@@ -3,10 +3,11 @@ pipeline {
      
      stages {
          stage('testing'){
+           steps{
              withCredentials([string(credentialsId: 'nexus_pass', Variable: 'PASSWORD')]) {
                 sh 'echo $PASSWORD'
              }
          }
-         
+         }
      }
 }
