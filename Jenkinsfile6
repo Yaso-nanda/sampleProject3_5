@@ -1,0 +1,12 @@
+pipeline {
+     agent any
+     
+     stages {
+         stage('testing'){
+             withCredentials([string(credentialsId: 'nexus_pass', Variable: 'PASSWORD')]) {
+                sh 'echo $PASSWORD'
+             }
+         }
+         
+     }
+}
