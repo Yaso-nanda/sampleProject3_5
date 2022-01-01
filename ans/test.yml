@@ -6,6 +6,7 @@
 
   tasks:
   - name: copying files 
+    become: true
     copy:
       src: ~/ans/*
       dest: ~/
