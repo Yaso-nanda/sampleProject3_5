@@ -8,7 +8,7 @@
   - name: copying files 
    # become: true
     copy:
-      src: /home/ansadmin/ans/
+      src: /home/ansadmin/ans/kube/
       dest: /home/ubuntu/
   - name: create a deployment
     command: kubectl apply -f mysql-configmap.yml
