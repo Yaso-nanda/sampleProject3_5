@@ -1,0 +1,5 @@
+[ansible]
+localhost
+
+[kubernetes]
+52.14.34.133
