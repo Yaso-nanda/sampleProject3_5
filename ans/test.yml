@@ -6,7 +6,7 @@
 
   tasks:
   - name: copying files 
-    become: true
+   # become: true
     copy:
       src: /home/ansadmin/ans/*
       dest: /home/ubuntu/
