@@ -1,0 +1,19 @@
+---
+- name: Create pods using deployment
+  hosts: kubernetes
+  #become: true
+  user: ubuntu
+
+  tasks:
+  - name: create a deployment
+    command: kubectl apply -f mysql-configmap.yml
+  - name:
+    command: kubectl apply -f mysqldb-root-credentials.yml
+  - name:
+    command: kubectl apply -f mysqldb-credentials.yml
+  - name:
+    command: kubectl apply -f mysql-deployment.yml
+  - name:
+    command: kubectl apply -f deployment.yml
+  - name: rollout
+    command: kubectl rollout restart deployment.v1.apps/springboot-k8s-mysql
