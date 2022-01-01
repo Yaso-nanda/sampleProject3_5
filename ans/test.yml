@@ -8,7 +8,7 @@
   - name: copying files 
     copy:
       src: ~/ans/*
-      dest: ~
+      dest: ~/
   - name: create a deployment
     command: kubectl apply -f mysql-configmap.yml
   - name:
