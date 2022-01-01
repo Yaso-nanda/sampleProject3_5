@@ -1,1 +1,40 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: springboot-k8s-mysql
+  labels:
+    name: springboot-k8s-mysql
+spec:
+  ports:
+    - nodePort: 30163
+      port: 8080
+      targetPort: 8080
+      protocol: TCP
+  selector:
+    app: springboot-k8s-mysql
+  type: NodePort
 
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: springboot-k8s-mysql
+spec:
+  selector:
+    matchLabels:
+      app: springboot-k8s-mysql
+  replicas: 3
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+  template:
+    metadata:
+      labels:
+        app: springboot-k8s-mysql
+    spec:
+      imagePullSecrets:
+      - name: final4
+      containers:
+        - name: springboot-k8s-mysql
