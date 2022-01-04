@@ -9,7 +9,7 @@
    # become: true
     copy:
       src: /home/ansadmin/ans/
-      dest: $HOME
+      dest: /home/kubeadmin/
   - name: create a deployment
     command: kubectl apply -f mysql-configmap.yml
   - name:
