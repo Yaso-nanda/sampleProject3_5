@@ -2,14 +2,14 @@
 - name: Create pods using deployment
   hosts: kubernetes
   #become: true
-  user: kubeadmin
+  user: kadmin
 
   tasks:
   - name: copying files 
    # become: true
     copy:
       src: /home/ansadmin/ans/
-      dest: /home/kubeadmin/
+      dest: /home/kadmin/
   - name: Pod Creation
     command: "{{ item }}"
     with_items:
