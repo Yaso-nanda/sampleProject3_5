@@ -10,15 +10,15 @@
     copy:
       src: /home/ansadmin/ans/
       dest: /home/kubeadmin/
-  - name: create a deployment
-    command: kubectl apply -f mysql-configmap.yml
-  - name:
-    command: kubectl apply -f mysqldb-root-credentials.yml
-  - name:
-    command: kubectl apply -f mysqldb-credentials.yml
-  - name:
-    command: kubectl apply -f mysql-deployment.yml
-  - name:
-    command: kubectl apply -f deployment.yml
-  - name: rollout
-    command: kubectl rollout restart deployment.v1.apps/springboot-k8s-mysql
+  - name: Pod Creation
+    command: "{{ item }}"
+    with_items:
+     - kubectl apply -f mysql-configmap.yml
+     - kubectl apply -f mysqldb-root-credentials.yml
+     - kubectl apply -f mysqldb-credentials.yml
+     - kubectl apply -f mysql-deployment.yml
+     - kubectl apply -f deployment.yml
+     - kubectl rollout restart deployment.v1.apps/springboot-k8s-mysql
+    environment:
+      KUBECONFIG: /home/kadmin/.kube/config
+    when: inventory_hostname == "192.168.0.100"
