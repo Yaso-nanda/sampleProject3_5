@@ -70,8 +70,8 @@ spec:
     spec:
       containers:
       - image: mysql:8 # image from docker-hub
-        args:
-          - "--ignore-db-dir=lost+found" # Workaround for https://github.com/doc                                                                                        ker-library/mysql/issues/186
+#        args:
+#          - "--ignore-db-dir=lost+found" # Workaround for https://github.com/doc                                                                                        ker-library/mysql/issues/186
         name: mysql
         env:
         - name: MYSQL_ROOT_PASSWORD # Setting Root Password of mysql From a 'Sec                                                                                        ret'
