@@ -39,6 +39,7 @@ spec:
       containers:
         - name: springboot-k8s-mysql
           image: nexus.dmantzrepo.tech/repo/sb
+          imagePullPolicy: Always
           ports:
             - containerPort: 8080                
           env:   # Setting Enviornmental Variables
