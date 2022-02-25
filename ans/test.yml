@@ -17,7 +17,7 @@
   - name:
     command: kubectl apply -f mysqldb-credentials.yml
   - name:
-    command: kubectl apply -f mysql-deployment.yml
+    command: kubectl apply -f mysql-deployment2.yml
   - name:
     command: kubectl apply -f deployment.yml
   - name: rollout
