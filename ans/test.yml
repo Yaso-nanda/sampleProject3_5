@@ -2,7 +2,7 @@
 - name: Create pods using deployment
   hosts: kubernetes
   #become: true
-  user: kadmin
+  user: ubuntu
 
   tasks:
   - name: copying files 
@@ -21,4 +21,4 @@
      - kubectl rollout restart deployment.v1.apps/springboot-k8s-mysql
     environment:
       KUBECONFIG: /home/kadmin/.kube/config
-    when: inventory_hostname == "192.168.0.100"
+    when: inventory_hostname == "172.31.20.129"
