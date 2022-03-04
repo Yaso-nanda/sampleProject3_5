@@ -8,7 +8,7 @@ spec:
   source:
     repoURL: https://github.com/Yaso-nanda/sampleProject3_5.git
     targetRevision: HEAD
-    path: ans
+    path: argo
     directory:
       recurse: true
   destination:
